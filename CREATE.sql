@@ -133,5 +133,11 @@ create table search_history (
     foreign key (product_id) references products (product_id)
 );
 
-
+create table product_cust(
+	customer_id int not null,
+    product_id int not null,
+    purchase_data timestamp not null,
+    foreign key (customer_id) references customer (customer_id),
+    foreign key (product_id) references products (product_id)
+);
 
