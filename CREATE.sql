@@ -84,42 +84,42 @@ create table cart (
 */
 
 	cart_id int not null,
-	purchase_date date not null,
+	purchase_date timestamp not null,
     customer_id int not null,
     status ENUM ('PAID','HOLD','DROP'),
     count int not null, 
-    cart_id_concat varchar(255) not null unique,
-    constraint cart_id_concat primary key (customer_id, purchase_date, cart_id),
+  --  cart_id_concat varchar(255) not null unique,
+    /*constraint cart_id_concat*/ primary key (customer_id, purchase_date, cart_id),
     foreign key (customer_id) references customer (customer_id)
 );
 
 
 create table customer_cart (
-	cart_id_concat varchar(255) not null ,
+	cart_id int not null,
     customer_id int not null,
-    create_date timestamp,
+    purchase_date timestamp not null,
 	foreign key (customer_id) references customer (customer_id),
-	foreign key (cart_id_concat) references cart (cart_id_concat)
+	foreign key (customer_id, purchase_date, cart_id) references cart (customer_id, purchase_date, cart_id)
 );
 
 
 create table trans (
+	customer_id int not null,
 	trans_id int not null,
-    paid_date date not null,
+    purchase_date timestamp not null,
     paid_method ENUM('CREDIT', 'CHECK'),
     paid_status  ENUM('SUCCESS', 'DECLINE', 'REVERT', 'REFUND'),
     card_number int not null,
-    trans_id_concat varchar(255) not null unique,
-    cart_id_concat varchar(255) not null,
-    foreign key (cart_id_concat) references cart (cart_id_concat),
-    constraint cart_id_concat primary key (cart_id_concat, trans_id)
+	primary key (customer_id, purchase_date, trans_id)
 );
 
 create table trans_cart (
-	cart_id_concat varchar(255) not null,
-	trans_id_concat varchar(255) not null,
-    foreign key (cart_id_concat) references cart (cart_id_concat),
-    foreign key (trans_id_concat) references trans (trans_id_concat)
+	customer_id int not null,
+    trans_id int not null,
+    purchase_date timestamp not null,
+    cart_id int not null,
+	foreign key (customer_id, purchase_date, cart_id) references cart (customer_id, purchase_date, cart_id),
+	foreign key (customer_id, purchase_date, trans_id) references trans (customer_id, purchase_date, trans_id)
 );
 
 
@@ -132,3 +132,6 @@ create table search_history (
 	foreign key (customer_id) references customer (customer_id),
     foreign key (product_id) references products (product_id)
 );
+
+
+
