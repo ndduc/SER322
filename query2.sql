@@ -27,7 +27,7 @@ SET @CARTID =
 where convert(purchase_date,date) = convert(@DATE_ADD, date));
 
 insert into cart
-(cart_id, purchase_date, customer_id, status, count)
+(cart_id, purchase_date, customer_id, status, number_of_items)
 values
 (@CARTID+1,  	@DATE_ADD	, @CUST_ID,'HOLD', 0);
 
@@ -46,15 +46,15 @@ values
 (@CUST_ID, 4 ,@DATE_ADD),
 (@CUST_ID, 5 ,@DATE_ADD);
 
-SELECT @COUNT_ITEM;
-SET @COUNT_ITEM = 
+SELECT @number_of_items_ITEM;
+SET @number_of_items_ITEM = 
 (select count(customer_id) from
 product_cust as pc
 where customer_id = @CUST_ID
 and purchase_data = @DATE_ADD);
 
 update cart
-set count = @COUNT_ITEM
+set number_of_items = @number_of_items_ITEM
 where customer_id = @CUST_ID
 and purchase_date = @DATE_ADD;
 

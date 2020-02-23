@@ -87,7 +87,7 @@ create table cart (
 	purchase_date timestamp not null,
     customer_id int not null,
     status ENUM ('PAID','HOLD','DROP'),
-    count int not null, 
+    number_of_items int not null, 
   --  cart_id_concat varchar(255) not null unique,
     /*constraint cart_id_concat*/ primary key (customer_id, purchase_date, cart_id),
     foreign key (customer_id) references customer (customer_id)

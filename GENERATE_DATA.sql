@@ -85,7 +85,7 @@ values
 
 
 insert into cart
-(cart_id, purchase_date, customer_id, status, count)
+(cart_id, purchase_date, customer_id, status, number_of_items )
 values
 (1,  	'2020-02-11 11:00:00'	, 1,'PAID', 1),
 (1, 	'2020-02-12 12:00:00'	, 2,'PAID', 6),
@@ -120,7 +120,7 @@ values
 (1, 1, '2020-02-11 11:00:00'),
 (1, 2, '2020-02-12 12:00:00'),
 (1, 3, '2020-02-13 13:00:00'),
-(2, 1, '2020-02-14 14:00:00'),
+(1, 1, '2020-02-14 14:00:00'),
 (1, 4, '2020-02-15 15:00:00');
 
 insert into trans
@@ -129,6 +129,9 @@ values
 (1, 1, '2020-02-11 11:00:00', 'CREDIT', 'SUCCESS', 123456789),
 (2, 1, '2020-02-12 12:00:00', 'CREDIT', 'SUCCESS', 464679135),
 (4, 1, '2020-02-15 15:00:00', 'CREDIT', 'SUCCESS', 461319877);
+
+
+
 
 insert into trans_cart
 (customer_id, purchase_date, trans_id, cart_id)
