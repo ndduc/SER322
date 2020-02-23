@@ -3,9 +3,9 @@ use product_test;
 /**
 Select product from the specific brand 
 or category
-*/
+*//*
 SELECT @BRAND;			
-SET @BRAND='B1';
+SET @BRAND='B1';*/
 
 select b.brand_name as BRAND, p.product_id as UPC, 
 p.description as PRODUCT, count(p.product_id) as SOLD_UNIT, 
