@@ -1,7 +1,7 @@
 # SER322
 
 Note:
-notice: product_test on the top of the script indicate the database, it can be anything depend on where store your table.
+notice: product_test on the top of the script indicate the database, it can be anything depend on where you store your table.
 
 Query 1 - show number of item sold in the given date
 
