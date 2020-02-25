@@ -11,5 +11,5 @@ Query 3 - Query allow looking for a specific item in the product table; conditon
 
 
 JAVA Note
-compiled jdk: jdk11
+compiled jdk: jdk11 \n
 execute all file in sql before compile java application
