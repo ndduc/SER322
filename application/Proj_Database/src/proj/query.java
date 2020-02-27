@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class query {
     Connection conn;
@@ -100,6 +102,46 @@ public class query {
         rs = null;
         return keyList;
     }
+    
+    public Map<String, String> getBrandList() {
+        Map<String, String> keyList = new HashMap<String, String>();
+        try {
+            st = conn.createStatement();
+            String sql = "SELECT  b.brand_id, b.brand_name FROM product_test.brand as b;";
+            rs = st.executeQuery(sql);
+            while(rs.next()) { 
+                String id = rs.getString("brand_id"); 
+                String name = rs.getString("brand_name");
+                keyList.put(id, name);
+            }
+
+            conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        rs = null;
+        return keyList;
+    }
+    
+    public Map<String, String> getCateList() {
+        Map<String, String> keyList = new HashMap<String, String>();
+        try {
+            st = conn.createStatement();
+            String sql = "SELECT c.category_id, c.category_name FROM product_test.category as c;";
+            rs = st.executeQuery(sql);
+            while(rs.next()) { 
+                String id = rs.getString("category_id"); 
+                String name = rs.getString("category_name");
+                keyList.put(id, name);
+            }
+
+            conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        rs = null;
+        return keyList;
+    }
   
 
     public  void searchSale_by_Date(String datefrom, String dateto) {
@@ -130,6 +172,38 @@ public class query {
     }
     
 
+    public void insert_product(String proid, String desc, String cost,
+            String price, String color, String dim, String size, 
+            String brand, String cate) {
+        try {
+            cs = getConn().prepareCall("{call insert_product(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cs.setString(1, proid);
+            cs.setString(2, desc);
+            cs.setString(3, cost);
+            cs.setString(4, price);
+            cs.setString(5, color);
+            cs.setString(6, dim);
+            cs.setString(7, size);
+            cs.setString(8, brand);
+            cs.setString(9, cate);
+            cs.registerOutParameter(10, Types.VARCHAR);
+            cs.execute();
+            String str = cs.getString(10);
+            if (str != null) {
+                System.out.println(str);
+            }
+            else {
+                cs.execute();
+                return;
+            }
+        } catch (SQLException e) {
+           // System.err.println("SQLException: " + e.getMessage());
+           // e.printStackTrace();
+        }
+        cs = null;
+        rs = null;
+    }
+    
     public Connection getConn() {
         return conn;
     }

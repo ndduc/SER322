@@ -40,6 +40,50 @@ public class ui {
         query qry = new query(conn);
         return qry.getProductKeySet();
     }
+    
+    public void printBrandList() {
+        Map<String, String> mp = createBrandList();
+        System.out.println("Available Brand:");
+        System.out.println("ID\t\tBrand");
+        for(String e: mp.keySet()) {
+            System.out.println(e + "\t\t" + mp.get(e));
+        }
+    }
+    
+    public void printCateList() {
+        Map<String, String> mp = createCateList();
+        System.out.println("Available Category:");
+        System.out.println("ID\t\tCategory");
+        for(String e: mp.keySet()) {
+            System.out.println(e + "\t\t" + mp.get(e));
+        }
+    }
+    
+    private Map<String, String> createBrandList() {
+        con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+        Connection conn = con.getConn();
+        query qry = new query(conn);
+        return qry.getBrandList();
+    }
+    
+    private Map<String, String> createCateList() {
+        con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+        Connection conn = con.getConn();
+        query qry = new query(conn);
+        return qry.getCateList();
+    }
+    
+    @SuppressWarnings("unused")
+    public void insertProduct(Integer proid, String desc, Double cost,
+            Double price, String color, String dim, String size, 
+            Integer brand, Integer cate) {
+        con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+        Connection conn = con.getConn();
+        query qry = new query(conn);
+        qry.insert_product(proid.toString(), desc, cost.toString(), price.toString(), color, dim, size, brand.toString(), cate.toString());
+    
+        
+    }
 
     
     public void printPrice(String id) {
@@ -66,9 +110,17 @@ public class ui {
 
 
     public List<String> getIdList() {
+        setItemList_Detail();
         return idList;
     }
     
+    public Map<String, String> getBrandMap() {
+        return createBrandList();
+    }
+    
+    public Map<String, String> getCateMap() {
+        return createCateList();
+    }
 
     
     
