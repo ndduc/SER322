@@ -77,11 +77,31 @@ public class ui {
     public void insertProduct(Integer proid, String desc, Double cost,
             Double price, String color, String dim, String size, 
             Integer brand, Integer cate) {
-        con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
-        Connection conn = con.getConn();
-        query qry = new query(conn);
-        qry.insert_product(proid.toString(), desc, cost.toString(), price.toString(), color, dim, size, brand.toString(), cate.toString());
+        try {
+            con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+            Connection conn = con.getConn();
+            query qry = new query(conn);
+            qry.insert_product(proid.toString(), desc, cost.toString(), price.toString(), color, dim, size, brand.toString(), cate.toString());
+            conn.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
     
+    @SuppressWarnings("unused")
+    public void updateProduct(Integer proid, String desc, Double cost,
+            Double price, String color, String dim, String size, 
+            Integer brand, Integer cate) {
+        try {
+            con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+            Connection conn = con.getConn();
+            query qry = new query(conn);
+            qry.update_product(proid.toString(), desc, cost.toString(), price.toString(), color, dim, size, brand.toString(), cate.toString());
+            conn.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         
     }
 

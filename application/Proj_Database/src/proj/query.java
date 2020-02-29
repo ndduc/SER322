@@ -171,6 +171,34 @@ public class query {
         rs = null;
     }
     
+    public void update_product(String proid, String desc, String cost,
+            String price, String color, String dim, String size, 
+            String brand, String cate) {
+        try {
+            cs = getConn().prepareCall("{call update_product(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+            cs.setString(1, proid);
+            cs.setString(2, desc);
+            cs.setString(3, cost);
+            cs.setString(4, price);
+            cs.setString(5, color);
+            cs.setString(6, dim);
+            cs.setString(7, size);
+            cs.setString(8, brand);
+            cs.setString(9, cate);
+            cs.registerOutParameter(10, Types.VARCHAR);
+            cs.execute();
+            String str = cs.getString(10);
+            if (str != null) {
+                System.out.println(str);
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("SQLException at [update_product]: " + e.getMessage());
+           // e.printStackTrace();
+        }
+        cs = null;
+        rs = null;
+    }
 
     public void insert_product(String proid, String desc, String cost,
             String price, String color, String dim, String size, 
@@ -192,12 +220,8 @@ public class query {
             if (str != null) {
                 System.out.println(str);
             }
-            else {
-                cs.execute();
-                return;
-            }
         } catch (SQLException e) {
-           // System.err.println("SQLException: " + e.getMessage());
+            System.err.println("SQLException at [insert_product]: " + e.getMessage());
            // e.printStackTrace();
         }
         cs = null;
