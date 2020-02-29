@@ -10,6 +10,7 @@ public class Main {
     static Map<String, String> cateList = new HashMap<String, String>();
     static ui u;
     static Scanner sc;
+    static boolean cp = false;
     public static void main(String[] args) {
         // TODO Auto-generated method stub
        
@@ -79,28 +80,58 @@ public class Main {
                             List<String> product_id = u.getIdList();
                             Map<String, String> brand_map = u.getBrandMap();
                             Map<String, String> cate_map = u.getCateMap();
-                            
-                            printHelper("Product Id", "Integer");
-                            Integer proc_id = sc.nextInt();
-                            printHelper("Product Description", "String");
-                            String desc = sc.next();
-                            printHelper("Product Cost", "Double");
-                            Double cost = sc.nextDouble();
-                            printHelper("Product Price", "Double");
-                            Double price = sc.nextDouble();
-                            printHelper("Product Color", "String");
-                            String color = sc.next();
-                            printHelper("Product Dimension", "String");
-                            String dim = sc.next();
-                            printHelper("Product Size", "String");
-                            String size = sc.next();
-                            printHelper("Product Brand Id", "Integer");
-                            Integer brand = sc.nextInt();
-                            printHelper("Product Category Id", "Integer");
-                            Integer cate = sc.nextInt();
-                        
-                            u.insertProduct(proc_id, desc, cost, price, color, dim, size, brand, cate);
-                            u.printList_Detail();
+                            try {
+                                printHelper("Product Id", "Integer");
+                                Integer proc_id = sc.nextInt();
+                                
+                                for(int i = 0; i < product_id.size(); i++) {
+                                    if(proc_id.toString().equals(product_id.get(i))) {
+                                        cp = true;
+                                        System.out.println("Product already existed, try again!");
+                                        break;
+                                    }
+                                    cp = false;
+                                }
+                                if(cp)
+                                    break;
+                                printHelper("Product Description", "String");
+                                String desc = sc.next();
+                                printHelper("Product Cost", "Double");
+                                Double cost = sc.nextDouble();
+                                printHelper("Product Price", "Double");
+                                Double price = sc.nextDouble();
+                                printHelper("Product Color", "String");
+                                String color = sc.next();
+                                printHelper("Product Dimension", "String");
+                                String dim = sc.next();
+                                printHelper("Product Size", "String");
+                                String size = sc.next();
+                                printHelper("Product Brand Id", "Integer");
+                                Integer brand = sc.nextInt();
+                                if(!brand_map.containsKey(brand.toString())) {
+                                    cp = true;
+                                    System.out.println("Brand not exist, try again!");
+                                } else {
+                                    cp = false;
+                                }
+                                if(cp)
+                                    break;
+                                printHelper("Product Category Id", "Integer");
+                                Integer cate = sc.nextInt();
+                                if(!cate_map.containsKey(cate.toString())) {
+                                    cp = true;
+                                    System.out.println("Category not exist, try again!");
+                                } else {
+                                    cp = false;
+                                }
+                                if(cp)
+                                    break;
+                                u.insertProduct(proc_id, desc, cost, price, color, dim, size, brand, cate);
+                                u.printList_Detail();
+                            } catch (Exception e) {
+                                System.out.println("One of the input is not valid, try again!");
+                                break;
+                            }
                             System.out.println("Enter [close] to close this option OR Enter [cnt] to continue insert");
                         } while(!sc.next().equalsIgnoreCase("close"));
                         break;
