@@ -14,13 +14,33 @@ public class Main {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
        
-        u = new ui();
-        u.printList_Detail();
-        idList = u.getIdList();
         
         
+        sc = new Scanner(System.in);
+        System.out.println("Set database connection\nSelect 1 for debug option"
+                + " (use default user and password)\nSelect 2 to manually "
+                + "input user and password");
+        if(sc.nextLine().equals("1")) {
+            u = new ui();
+            u.printList_Detail();
+            idList = u.getIdList();
+        } else {
+            printHelper("Database Driver", "String");
+            String driver = sc.nextLine();
+            printHelper("Database url", "String");
+            String url = sc.nextLine();
+            printHelper("Database username", "String");
+            String user = sc.nextLine();
+            printHelper("Database password", "String");
+            String pass = sc.nextLine();
+            
+            u = new ui(url, driver, user, pass);
+            u.printList_Detail();
+            idList = u.getIdList();
+        }
         
         System.out.println("Enter program terminal.");
+        
         printPrompt();
       //  sc = new Scanner(System.in);
         

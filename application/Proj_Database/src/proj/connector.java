@@ -28,6 +28,7 @@ public class connector {
             conn = DriverManager.getConnection(url, user, pass);
         } catch(Exception e) {
             e.printStackTrace();
+            System.exit(0);
         }
     }
     

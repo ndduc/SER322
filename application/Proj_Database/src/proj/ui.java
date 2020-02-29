@@ -7,8 +7,21 @@ public class ui {
     Map<String, product> productMap;
     List<String> idList;
     connector con;
+    String url, driver,  user,  pass;
     public ui() {
         productMap = new HashMap<String, product>();
+        url = connection_info.url;
+        driver = connection_info.driver;
+        user = connection_info.user;
+        pass = connection_info.pass;
+    }
+    
+    public ui(String url, String driver, String user, String pass) {
+        productMap = new HashMap<String, product>();
+        this.url = url;
+        this.driver = driver;
+        this.user = user;
+        this.pass = pass;
     }
     
     
@@ -29,13 +42,13 @@ public class ui {
     }
     
     private void createItemList_Detail(String productId) {
-        con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+        con = new connector(getUrl(), getDriver(), getUser(), getPass());
         product pro = new product(Integer.valueOf(productId));
         productMap.put(productId, pro);
     }
     
     private List<String> createItemList() {
-        con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+        con = new connector(getUrl(), getDriver(), getUser(), getPass());
         Connection conn = con.getConn();
         query qry = new query(conn);
         return qry.getProductKeySet();
@@ -60,14 +73,14 @@ public class ui {
     }
     
     private Map<String, String> createBrandList() {
-        con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+        con = new connector(getUrl(), getDriver(), getUser(), getPass());
         Connection conn = con.getConn();
         query qry = new query(conn);
         return qry.getBrandList();
     }
     
     private Map<String, String> createCateList() {
-        con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+        con = new connector(getUrl(), getDriver(), getUser(), getPass());
         Connection conn = con.getConn();
         query qry = new query(conn);
         return qry.getCateList();
@@ -78,7 +91,7 @@ public class ui {
             Double price, String color, String dim, String size, 
             Integer brand, Integer cate) {
         try {
-            con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+            con = new connector(getUrl(), getDriver(), getUser(), getPass());
             Connection conn = con.getConn();
             query qry = new query(conn);
             qry.insert_product(proid.toString(), desc, cost.toString(), price.toString(), color, dim, size, brand.toString(), cate.toString());
@@ -94,7 +107,7 @@ public class ui {
             Double price, String color, String dim, String size, 
             Integer brand, Integer cate) {
         try {
-            con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+            con = new connector(getUrl(), getDriver(), getUser(), getPass());
             Connection conn = con.getConn();
             query qry = new query(conn);
             qry.update_product(proid.toString(), desc, cost.toString(), price.toString(), color, dim, size, brand.toString(), cate.toString());
@@ -118,7 +131,7 @@ public class ui {
     
     
     public void printProduct_Seach(String product) {
-        con = new connector(connection_info.url, connection_info.driver, connection_info.user, connection_info.pass);
+        con = new connector(getUrl(), getDriver(), getUser(), getPass());
         query qry = new query(con.getConn());
         qry.searchProduct_by_Name(product);
     }
@@ -140,6 +153,22 @@ public class ui {
     
     public Map<String, String> getCateMap() {
         return createCateList();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getPass() {
+        return pass;
     }
 
     
