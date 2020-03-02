@@ -9,6 +9,9 @@ Query 2 - This query simulates the scenario where the customer initiates a cart 
 
 Query 3 - Query allow looking for a specific item in the product table; conditonal statement use LIKE wild card.
 
+JAVA Note
+compiled jdk: jdk11 \n
+execute all file in sql before compile java application
 
 Compiling instruction:
 Assume you are in project directory
