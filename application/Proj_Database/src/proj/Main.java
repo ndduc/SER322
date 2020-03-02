@@ -3,7 +3,13 @@ package proj;
 import java.sql.Connection;
 import java.util.*;
 
+/**
+  javac -d ./ -cp ".:./lib/mysql-connector-java-8.0.19.jar" src/proj/connection_info.java src/proj/connector.java src/proj/Main.java src/proj/product.java src/proj/query.java src/proj/ui.java
 
+  java -cp ".:./lib/mysql-connector-java-8.0.19.jar" proj.Main      //Linux
+  java -cp ".;./lib/mysql-connector-java-8.0.19.jar" proj.Main      //WINdow
+ * 
+ * */
 public class Main {
     static List<String> idList = new ArrayList<String>();
     static Map<String,String> brandList = new HashMap<String, String>();
@@ -25,6 +31,7 @@ public class Main {
             u.printList_Detail();
             idList = u.getIdList();
         } else {
+            System.out.println("Database url example: jdbc:mysql://localhost/product_test\nDatabase driver example:com.mysql.cj.jdbc.Driver") ;
             printHelper("Database Driver", "String");
             String driver = sc.nextLine();
             printHelper("Database url", "String");
@@ -238,7 +245,8 @@ public class Main {
                 + "\n[sale]\t->\t to look for sold unit"
                 + "\n[insert]\t->\t to add new product"
                 + "\n[update]\t->\t to update product"
-                + "\n[exit]\t->\t to terminate the program\n");
+                + "\n[exit]\t->\t to terminate the program\n"
+                + "[Notification - possible bug] - user might have to input option command twice to trigger the event\n");
     }
     
     static void printHelper(String what, String format) {

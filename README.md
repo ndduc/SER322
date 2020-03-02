@@ -9,7 +9,13 @@ Query 2 - This query simulates the scenario where the customer initiates a cart 
 
 Query 3 - Query allow looking for a specific item in the product table; conditonal statement use LIKE wild card.
 
-
 JAVA Note
 compiled jdk: jdk11 \n
 execute all file in sql before compile java application
+
+Compiling instruction:
+Assume you are in project directory
+  javac -d ./ -cp ".:./lib/mysql-connector-java-8.0.19.jar" src/proj/connection_info.java src/proj/connector.java src/proj/Main.java src/proj/product.java src/proj/query.java src/proj/ui.java
+
+  java -cp ".:./lib/mysql-connector-java-8.0.19.jar" proj.Main      //Linux
+  java -cp ".;./lib/mysql-connector-java-8.0.19.jar" proj.Main      //WINdow
