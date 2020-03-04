@@ -1,12 +1,18 @@
 package proj;
 
+import java.sql.Connection;
+
+/**
+ * Class used to store product info 
+ * */
 public class product {
     String name, price, brand, size, dimension, color;
     
-    public product(Integer productId) {
-        connector con = new connector(connection_info.url, connection_info.driver, connection_info.user,
-                connection_info.pass);
-        query qry = new query(con.getConn());
+    /**
+     * product will be initiate by product id 
+     * */
+    public product(Integer productId, Connection conn) {
+        query qry = new query(conn);
         qry.searchProduct_by_id(productId);
         this.name = qry.getName();
         this.price = qry.getPrice();
@@ -16,6 +22,8 @@ public class product {
         this.color = qry.getColor();
     }
 
+
+    
     public String getName() {
         return name;
     }

@@ -3,6 +3,12 @@ package proj;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Class used to get a connection with connector
+ * then use the existing connector with query in the query class
+ * Most methods in class are print method
+ * 
+ * */
 public class ui {
     Map<String, product> productMap;
     List<String> idList;
@@ -43,7 +49,7 @@ public class ui {
     
     private void createItemList_Detail(String productId) {
         con = new connector(getUrl(), getDriver(), getUser(), getPass());
-        product pro = new product(Integer.valueOf(productId));
+        product pro = new product(Integer.valueOf(productId), con.getConn());
         productMap.put(productId, pro);
     }
     
