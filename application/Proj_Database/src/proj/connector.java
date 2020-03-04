@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Map;
 
+/**
+ * Create sql connection class
+ * constructor take
+ * url, driver, user, pass
+ * url indicates database connection string
+ * */
 public class connector {
     Connection conn;
     String url;
@@ -12,6 +18,9 @@ public class connector {
     String pass;
     
     
+    /**
+     * constructor set require variable then create a connection with setConnection()
+     * */
     
     public connector(String url, String driver, String user, String pass) {
         this.url = url;
@@ -22,6 +31,10 @@ public class connector {
     }
     
     
+    /**
+     * set connection
+     * where conn is instance connection variable
+     * */
     private void setConnection() {
         try {
             Class.forName(driver);
@@ -33,6 +46,9 @@ public class connector {
     }
     
 
+    /**
+     * getter and setter
+     * */
     public Connection getConn() {
         return conn;
     }

@@ -11,6 +11,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class will be used to communicate with the database
+ * query will be executed in form of stored procedure thus no complex query present in this class
+ * except some simple select query
+ * Stored procedure will be called as follow
+ *  "{call getProductBy_id(?, ?)}"
+ * where ?, ? are represent parameter, this sp has 2 parameters
+ * */
 public class query {
     Connection conn;
     CallableStatement cs = null;
@@ -22,10 +30,18 @@ public class query {
     String name, cost, price, size, color, dimension, brand, category,
     product_id, brand_id, category_id;
     
+    
+    /**
+     * Getting the established connection
+     * */
     public query(Connection conn) {
         this.conn = conn;
     }
     
+    
+    /***
+     * Execute search product by id
+     * */
     public  void searchProduct_by_id(Integer product_id) {
         try {
             cs = getConn().prepareCall("{call getProductBy_id(?, ?)}");
@@ -60,6 +76,9 @@ public class query {
         rs = null;
     }
     
+    /**
+     * Execute search product by name
+     * */
     public  void searchProduct_by_Name(String name) {
         try {
             cs = getConn().prepareCall("{call getProductBy_desc(?, ?)}");
@@ -83,6 +102,10 @@ public class query {
         rs = null;
     }
     
+    
+    /***
+     * get product id then add it to list
+     * */
     public List<String> getProductKeySet() {
         List<String> keyList = new ArrayList<String>();
         try {
@@ -103,6 +126,10 @@ public class query {
         return keyList;
     }
     
+    
+    /**
+     * get brand list, id and name
+     * */
     public Map<String, String> getBrandList() {
         Map<String, String> keyList = new HashMap<String, String>();
         try {
@@ -123,6 +150,10 @@ public class query {
         return keyList;
     }
     
+    
+    /**
+     * get category list id and name
+     * */
     public Map<String, String> getCateList() {
         Map<String, String> keyList = new HashMap<String, String>();
         try {
@@ -144,6 +175,9 @@ public class query {
     }
   
 
+    /**
+     * get sale by date
+     * */
     public  void searchSale_by_Date(String datefrom, String dateto) {
         try {
             cs = getConn().prepareCall("{call getSale_byDate(?, ?, ?)}");
@@ -171,6 +205,10 @@ public class query {
         rs = null;
     }
     
+    
+    /**
+     * update product
+     * */
     public void update_product(String proid, String desc, String cost,
             String price, String color, String dim, String size, 
             String brand, String cate) {

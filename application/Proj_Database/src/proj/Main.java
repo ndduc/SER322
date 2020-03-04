@@ -246,7 +246,7 @@ public class Main {
                 + "\n[insert]\t->\t to add new product"
                 + "\n[update]\t->\t to update product"
                 + "\n[exit]\t->\t to terminate the program\n"
-                + "[Notification - possible bug] - user might have to input option command twice to trigger the event\n");
+                + "[Notification - possible bug] - user might have to input command option twice to trigger the event\n");
     }
     
     static void printHelper(String what, String format) {
